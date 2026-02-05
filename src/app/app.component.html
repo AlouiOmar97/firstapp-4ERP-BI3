@@ -1,13 +1,17 @@
 <app-header></app-header>
-<h1> {{ title | lowercase | uppercase }} </h1>
-<p> {{ 1 + 3 + getMyNumber() }} </p>
-<p> {{ msg }} </p>
-<p *ngIf="x== false"> x = false</p>
-<div>
-  <p *ngFor="let a of t">
-    {{ a }}
-  </p>
-</div>
-<input type="text" [(ngModel)]="msg"/>
-<button (click)="writeMsg()" [disabled]="x">Click ME</button>
+<app-list-suggestion></app-list-suggestion>
+<!--
+
+  <h1> {{ title | lowercase | uppercase }} </h1>
+  <p> {{ 1 + 3 + getMyNumber() }} </p>
+  <p> {{ msg }} </p>
+  <p *ngIf="x== false"> x = false</p>
+  <div>
+    <p *ngFor="let a of t">
+      {{ a }}
+    </p>
+  </div>
+  <input type="text" [(ngModel)]="msg"/>
+  <button (click)="writeMsg()" [disabled]="x">Click ME</button>
+-->
 <app-footer></app-footer>
