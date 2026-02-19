@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { Suggestion } from './../../models/suggestion';
+import { Suggestion } from '../../models/suggestion';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-list-suggestion',
-  templateUrl: './list-suggestion.component.html',
-  styleUrl: './list-suggestion.component.css'
+  selector: 'app-suggestion-details',
+  templateUrl: './suggestion-details.component.html',
+  styleUrl: './suggestion-details.component.css'
 })
-export class ListSuggestionComponent {
+export class SuggestionDetailsComponent {
+  suggestion!: Suggestion | any;
+  id!: string;
   suggestions: Suggestion[] = [
     {
     id: 1,
@@ -44,27 +47,19 @@ export class ListSuggestionComponent {
     status: 'en_attente',
     nbLikes:0
     },
-    ];
-    favoriteList:Suggestion[]=[];
-    searchTerm: string = '';
+  ];
 
-    likeSuggestion(sugesstion: Suggestion){
-      sugesstion.nbLikes ++;
-    }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router){}
 
-    addToFavorite(suggestion:Suggestion){
-      if(!this.favoriteList.includes(suggestion))
-        {this.favoriteList.push(suggestion)}
-    }
+  ngOnInit(){
+    this.id = this.activatedRoute.snapshot.params['id']
+    console.log('This is the id: ', this.id)
+    console.log(this.activatedRoute.snapshot)
+    this.suggestion = this.suggestions.find( s => s.id == +this.id)
+  }
 
-    filterSuggestion(): Suggestion[] {
-      if(this.searchTerm=='' || !this.searchTerm){
-        return this.suggestions
-      }
-      return this.suggestions.filter( 
-        suggestion => 
-          suggestion.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()) ||
-          suggestion.category.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase())
-      )
-    }
+  returnToList(){
+    this.router.navigateByUrl('/suggestion/list');
+  }
+  
 }

@@ -6,16 +6,15 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'firstapp 4ERP-BI3';
-  x: boolean = true;
-  msg: string = "";
-  t=[1,2,3,4,"five"];
+  title = 'firstapp 4ERP-BI4';
+  x = false;
+  msg = "";
 
-  getMyNumber(): number {
-    return 100;
+  fillMsg(){
+    this.msg = "Hello World!";
   }
 
-  writeMsg(): void {
-    this.msg = "Hello World!";
+  getNumber(): number {
+    return 42;
   }
 }

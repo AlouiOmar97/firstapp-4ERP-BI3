@@ -4,7 +4,7 @@
         <div class="card m-2">
             <div class="card-body">
                 <h2 class="card-title"> {{ suggestion.title }} </h2>
-                <h6><span class="text-primary"> {{ suggestion.category }} </span> {{ suggestion.date | date }} </h6>
+                <h6><span class="text-primary"> {{ suggestion.category }} </span> {{ suggestion.date  | date:'dd MMM yyyy' }} </h6>
                 <p class="card-text"> {{ suggestion.description }} </p>
                 <p class="card-text" *ngIf="suggestion.status == 'acceptee'"> <span class="badge text-bg-success"> {{ suggestion.status }} </span> </p>
                 <p class="card-text" *ngIf="suggestion.status == 'refusee'"> <span class="badge text-bg-danger"> {{ suggestion.status }} </span> </p>
