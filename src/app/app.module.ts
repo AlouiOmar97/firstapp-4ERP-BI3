@@ -9,8 +9,9 @@ import { FooterComponent } from './footer/footer.component';
 import { ListSuggestionComponent } from './core/list-suggestion/list-suggestion.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AnnonceModule } from './annonce/annonce.module';
+// import { AnnonceModule } from './annonce/annonce.module';
 import { SuggestionDetailsComponent } from './core/suggestion-details/suggestion-details.component';
+import { AddSuggestionComponent } from './core/add-suggestion/add-suggestion.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SuggestionDetailsComponent } from './core/suggestion-details/suggestion
     ListSuggestionComponent,
     HomeComponent,
     NotFoundComponent,
+    AddSuggestionComponent,
     SuggestionDetailsComponent,
   ],
   imports: [

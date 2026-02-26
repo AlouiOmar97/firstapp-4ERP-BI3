@@ -2,6 +2,7 @@
     <h1 class="text-center mt-5 mb-5">Liste des Suggestions</h1>
     <div>
         <input class="form-control m-2" type="text" placeholder="Rechercher une suggestion" [(ngModel)]="searchTerm">
+        <a class="btn btn-link md-3" routerLink="/suggestion/add"><i class="bi bi-plus-circle p-3"></i>Ajouter une Suggestion</a>
         <div class="card m-2" *ngFor="let suggestion of filterSuggestion()">
         <div class="card-body">
             <h5 class="card-title"> {{ suggestion.title }} </h5>
