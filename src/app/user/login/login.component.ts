@@ -5,7 +5,8 @@ import { Login } from '../../models/login';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
+  providers: []
 })
 export class LoginComponent {
   loginForm!: FormGroup

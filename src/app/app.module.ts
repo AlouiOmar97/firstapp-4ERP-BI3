@@ -12,6 +12,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 // import { AnnonceModule } from './annonce/annonce.module';
 import { SuggestionDetailsComponent } from './core/suggestion-details/suggestion-details.component';
 import { AddSuggestionComponent } from './core/add-suggestion/add-suggestion.component';
+import { SuggestionService } from './services/suggestion.service';
+import { provideHttpClient } from '@angular/common/http';
+import { UpdateSuggestionComponent } from './core/update-suggestion/update-suggestion.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { AddSuggestionComponent } from './core/add-suggestion/add-suggestion.com
     NotFoundComponent,
     AddSuggestionComponent,
     SuggestionDetailsComponent,
+    UpdateSuggestionComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,7 @@ import { AddSuggestionComponent } from './core/add-suggestion/add-suggestion.com
    // AnnonceModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ provideHttpClient() ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

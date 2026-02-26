@@ -5,6 +5,7 @@ import { ListSuggestionComponent } from './core/list-suggestion/list-suggestion.
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SuggestionDetailsComponent } from './core/suggestion-details/suggestion-details.component';
 import { AddSuggestionComponent } from './core/add-suggestion/add-suggestion.component';
+import { UpdateSuggestionComponent } from './core/update-suggestion/update-suggestion.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'home', pathMatch:'full'},
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path:'suggestion/list', component: ListSuggestionComponent},
   { path:'suggestion/add', component: AddSuggestionComponent},
   { path:'suggestion/details/:id', component: SuggestionDetailsComponent},
+  { path:'suggestion/update/:id', component: UpdateSuggestionComponent},
   { path:'annonce', loadChildren: () => import('./annonce/annonce.module').then( m => m.AnnonceModule) },
   { path:'user', loadChildren: () => import('./user/user.module').then( m => m.UserModule) },
   { path:'**', component: NotFoundComponent},

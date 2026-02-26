@@ -3,15 +3,15 @@ import { Suggestion } from '../../models/suggestion';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LogService } from '../../services/log.service';
 import { SuggestionService } from '../../services/suggestion.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-suggestion',
-  templateUrl: './add-suggestion.component.html',
-  styleUrl: './add-suggestion.component.css'
+  selector: 'app-update-suggestion',
+  templateUrl: './update-suggestion.component.html',
+  styleUrl: './update-suggestion.component.css'
 })
-export class AddSuggestionComponent {
-  suggestion: Suggestion = {
+export class UpdateSuggestionComponent {
+suggestion: Suggestion = {
     id: 0,
     title: '',
     description: '',
@@ -33,19 +33,26 @@ export class AddSuggestionComponent {
   'Accessibilité',
   'Autre'
   ];
-
-  constructor(private logService: LogService, private suggestionService: SuggestionService, private router: Router){}
+  id!: string
+  constructor(private activatedRoute: ActivatedRoute, private logService: LogService, private suggestionService: SuggestionService, private router: Router){}
 
   ngOnInit(){
+    this.id = this.activatedRoute.snapshot.params['id']
     //console.log((new Date()).toISOString().split('T')[0])
-    this.suggestionForm = new FormGroup({
+    this.suggestionService.readOneSuggestion(this.id).subscribe((data)=>{
+      this.suggestion = data.suggestion
+      console.log(this.suggestion);
+      
+      this.suggestionForm = new FormGroup({
       title: new FormControl(this.suggestion.title, [Validators.required, Validators.minLength(5), Validators.pattern('^[A-Z][a-zA-Z]*$')]),
       description: new FormControl(this.suggestion.description, [Validators.required, Validators.minLength(10)]),
       category: new FormControl(this.suggestion.category, Validators.required),
-      date: new FormControl(this.suggestion.date, Validators.required),
+      date: new FormControl(((this.suggestion.date).toString()).split('T')[0], Validators.required),
       status: new FormControl(this.suggestion.status, Validators.required),
       nbLikes: new FormControl(this.suggestion.nbLikes)
     })
+    })
+    
   }
 
   get title(){ return this.suggestionForm.get('title') }
@@ -60,8 +67,8 @@ export class AddSuggestionComponent {
     this.logService.warn(this.suggestionForm.value)
     this.logService.error(this.suggestionForm.value)
 
-    this.suggestionService.createSuggestion(this.suggestionForm.value).subscribe(()=>{
-      this.logService.log('Suggestion created !')
+    this.suggestionService.updateSuggestion(this.id, this.suggestionForm.value).subscribe(()=>{
+      this.logService.log('Suggestion updated !')
       this.router.navigateByUrl('/suggestion/list')
     })
   }

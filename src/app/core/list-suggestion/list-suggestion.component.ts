@@ -1,3 +1,4 @@
+import { SuggestionService } from './../../services/suggestion.service';
 import { Component } from '@angular/core';
 import { Suggestion } from './../../models/suggestion';
 
@@ -48,6 +49,15 @@ export class ListSuggestionComponent {
     favoriteList:Suggestion[]=[];
     searchTerm: string = '';
 
+    constructor(private suggestionService: SuggestionService){}
+
+    ngOnInit(){
+      this.suggestionService.readAllSuggestion().subscribe((data)=>{
+        console.log(data)
+        this.suggestions = data
+      })
+    }
+
     likeSuggestion(sugesstion: Suggestion){
       sugesstion.nbLikes ++;
     }
@@ -66,5 +76,11 @@ export class ListSuggestionComponent {
           suggestion.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()) ||
           suggestion.category.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase())
       )
+    }
+
+    deleteSuggestion(id: any){
+      this.suggestionService.deleteSuggestion(id).subscribe(()=>{
+        this.suggestions = this.suggestions.filter( s => s.id != id)
+      })
     }
 }
